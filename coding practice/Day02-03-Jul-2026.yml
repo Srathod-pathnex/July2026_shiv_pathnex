@@ -1,0 +1,25 @@
+
+---
+- name: Install and enable Nginx on Ubuntu server
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: update package and cache
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: start and enable Ngnix
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+
+
+

@@ -1,0 +1,7 @@
+9-11 am= watched youtube video
+11-2 pm=" all linux command practice"
+5-7 pm= "writing .yml file"
+	installed ansible
+	created inventry file
+	installed nginx
+	started and enabled ngnix 
