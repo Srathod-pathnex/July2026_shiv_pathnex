@@ -1,0 +1,8 @@
+2-5= youtube video
+5:30-7= linux practice
+7:30-21:20= daily task
+
+Today, I learned an Ansible playbook to install and configure Nginx,
+ explored a Terraform security group configuration for an AWS EC2 instance, 
+and created a Dockerfile to build a custom Apache image.
+ I also built and ran a Docker container and practiced troubleshooting Docker build and container-related errors.
