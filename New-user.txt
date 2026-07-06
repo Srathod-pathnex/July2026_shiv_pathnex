@@ -1,0 +1,18 @@
+---
+- name: Create Username And Value
+  hosts: all
+  become: yes
+  
+  tasks:
+    - name: Create New User
+      user:
+        name: pathnex
+        state: present
+        shell: /bin/bash
+
+    - name: set permission for user
+      file:
+         path: /home/pathnex
+         owner: pathnex
+         group: pathnex
+         mode: '0755'
