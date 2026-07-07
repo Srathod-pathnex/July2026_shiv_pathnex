@@ -1,5 +1,5 @@
-# Docker File
-FROM python:3.11
-WORKDIR /opt/pathnex/python-app
-COPY app.py /opt/pathnex/python-app/
-CMD ["python", "/opt/pathnex/python-app/app.py"]
+
+FROM node:18
+WORKDIR /opt/pathnex/node-app
+COPY app.js /opt/pathnex/node-app/
+CMD ["node", "/opt/pathnex/node-app/app.js"]
