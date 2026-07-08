@@ -1,0 +1,7 @@
+9-11am= youtube video
+12-2pm = linux practice
+3-5pm = daily task
+6-7pm= aws study
+
+Today, I worked on Ansible by creating and correcting a playbook to install Nginx, copy a custom configuration file, and manage the Nginx service.
+ I also practiced Docker by containerizing a Java application, learning Dockerfile instructions (FROM, WORKDIR, COPY, RUN, CMD), and using basic Vim commands like undo (u) and redo (Ctrl + r).

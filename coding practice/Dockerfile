@@ -1,5 +1,6 @@
 
-FROM node:18
-WORKDIR /opt/pathnex/node-app
-COPY app.js /opt/pathnex/node-app/
-CMD ["node", "/opt/pathnex/node-app/app.js"]
+FROM eclipse-temurin:17-jdk
+WORKDIR /opt/pathnex/java-app
+COPY Hello.java .
+RUN javac Hello.java
+CMD ["java", "-cp", "/opt/pathnex/java-app", "Hello"]
