@@ -1,0 +1,7 @@
+9-12pm -- youtube video
+1-3pm -- practice 
+4-6pm -- daily task
+6-7pm -- K8s preparation
+
+throughout morning session i have learned about K8s infratsuture, component of k8s, Master node/Control plane, Worker node,
+deployement,service,replicaset and many more
