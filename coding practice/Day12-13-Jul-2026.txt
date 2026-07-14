@@ -1,0 +1,75 @@
+# scaling application and automation
+
+---
+- name: Setup Auto Scaling Group
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Create launch configuration
+      ec2_asg:
+         name: pathnex-asg
+         region: us-east-1
+         launch_config_name: pathnex-launch-config
+         min_size: 1
+         max_size: 3
+         desired_capacity: 2
+         vpc_zone_identifier: subnet-12345678
+
+---
+- name: Setup Auto Scaling Group
+  hosts: all
+  become: yes
+
+  tasks: 
+    - name: Create launch Configuration
+      ec2_asg:
+         name: pathnex-asg
+         region: us-east-1
+         launch_config_name: pathnex-launch-config
+         min_size: 1
+         max_size: 3
+         desire_size: 2
+         vpc_zone_identifier: subnet-123456789
+
+# terraform - craete a load balencer with ec2 instance
+ 
+provider "aws" {
+	region = "ap-south-1"
+}
+
+resource "aws_instance" "pathnex_inst" {
+	ami = "ami-0abcd1234abcd1234"
+	instance_type = "t2.micro"
+	vpc_security_group_ids = [aws_security_group.allow_ssh_http.id]
+	tags = { 
+	Name = "ec2-pathnex"	
+	}
+}
+
+
+provider "aws" { 
+	region = "us-east-1"
+ 
+}
+
+resource "aws_instance" "pathnex_insta" {
+	ami = "ami-0abcd1234abcd1234"
+	instance_type = "t2.micro"
+	vpc_security_group_ids = [aws_security_group.allow_ssh_http.id]
+	tags = {
+	   Name = "pathnex-EC2"
+	 }
+}
+
+
+#Dockerfile #Docker-volume
+
+FROM ubuntu
+WORKDIR /opt/pathnex
+VOLUME ["/opt/pathnex/data"]
+CMD ["sleep", "1000"]
+
+
+
+
