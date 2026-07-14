@@ -1,0 +1,6 @@
+9-12pm = youtube video
+1-3pm = practice of youtube video
+5-7:30pm = daily task perform + practice of evenning session
+
+got complete understanding of deployment and service ,replicaset, stetfulset, and deployment types
+

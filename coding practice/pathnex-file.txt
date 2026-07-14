@@ -1,0 +1,5 @@
+
+ Welcome to Pathnex!
+This file is copied using the Docker COPY instruction.
+Docker is a containerization platform.
+This is a sample text file for Docker practice.
