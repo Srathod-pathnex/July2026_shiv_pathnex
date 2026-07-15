@@ -1,5 +1,6 @@
-# Docker File
-FROM python:3.11
-WORKDIR /opt/pathnex/python-app
-COPY app.py /opt/pathnex/python-app/
-CMD ["python", "/opt/pathnex/python-app/app.py"]
+
+FROM eclipse-temurin:17-jdk
+WORKDIR /opt/pathnex/java-app
+COPY Hello.java .
+RUN javac Hello.java
+CMD ["java", "-cp", "/opt/pathnex/java-app", "Hello"]

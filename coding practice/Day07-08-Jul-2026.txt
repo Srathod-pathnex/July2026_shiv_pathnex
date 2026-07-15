@@ -1,0 +1,95 @@
+#ansible — Setup Nginx with Custom Config
+---
+- name: setup Nginx with Custom Config
+  hosts: all
+  become: yes
+  
+  tasks: 
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+    - name: copy custom nginx.conf
+      copy: 
+        src: nginx.conf
+        dest: /etc/nginx/nginx.conf
+    - name: start nginx
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
+
+
+
+- name: setup nginx with custom config
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx 
+        state: present
+        update_cache: yes
+
+    - name: copy custom config
+      copy: 
+        src: nginx.conf
+        dest: /etc/nginx/nginx.conf
+   
+    - name: start nginx
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
+
+
+#Docker java application
+# java script
+class Hello {
+	public static void main(String[] args) { 
+            System.out.println("hello pathnex");
+  } 
+}
+
+#Dockerfile
+
+FROM openjdk:17
+WORKDIR /opt/pathnex/java-app
+COPY Hello.java .
+RUN javac Hello.java
+CMD ["java", "-cp", "/opt/pathnex/java-app", "Hello"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

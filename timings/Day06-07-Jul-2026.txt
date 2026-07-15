@@ -1,0 +1,8 @@
+9-12--youtube video + practice live
+2-4--practice of linux commands
+5-7:30--github practice and daily task
+
+ Worked on Bash scripting (variables, arrays, loops, conditions), created a service status checker,
+ automated date-based file creation, wrote and debugged an Ansible playbook to install Docker,
+ resolved APT/Jenkins repository issues, installed and troubleshot Docker on Ubuntu WSL, verified services with systemctl,
+ and practiced using vim for script and playbook management
