@@ -1,0 +1,42 @@
+---
+- name: Setup Docker Container for Multiple Apps
+  hosts: all
+  become: yes
+  tasks:
+    - name: Pull Web App Image
+      docker_image:
+         name: tcs-web-app
+         source: pull
+
+    - name: Pull database app image
+      docker_image:
+         name: tcs-database-app
+         source: pull
+    
+    - name: Run wenb app container
+      docker_container:
+         name: tcs-web-container
+         image: tcs-web-app
+         state: started
+         published_ports:
+           - "8080:80"
+   
+    - name: Run database container
+      docker_container:
+         name: tcs-data-container
+         image: tcs-database-app
+         state: started
+         published_ports:
+           - "3306:3306"
+
+
+
+#Dockerfile
+
+FROM ubuntu:22.04
+
+WORKDIR /opt/pathnex/devops-project
+
+COPY . /opt/pathnex/devops-project/
+
+CMD ["ls", "-l", "/opt/pathnex/devops-project"]
