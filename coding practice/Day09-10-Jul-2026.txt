@@ -1,0 +1,23 @@
+# installing docker compose using Ansible
+---
+- name: Install Docker Compose
+  hosts: all
+  become: yes
+
+  tasks: 
+    - name: Install dependencies
+      yum: 
+        name: "python3-pip"
+        state: present
+    - name: Install docker-compose
+      pip:
+        name: Docker compose
+
+
+#Dockerfile
+#Alpine Linux
+ 
+FROM alpine:linux
+WORKDIR /op/pathnex/alpine-app
+CMD [ "echo", "Hello pathnex"]
+    
