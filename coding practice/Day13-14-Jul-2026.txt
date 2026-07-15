@@ -1,0 +1,55 @@
+#Day 13 — Advanced Automation with CloudFormation and CI/CD
+# Ansible — Multi-Node Nginx Setup
+
+---
+- name: Setup Nginx On Multiple Node
+  hosts: all
+  become: yes
+  tasks:
+    - name: Insatll nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+#🔹 Terraform — Create IAM Users and Policies
+
+provider "aws" {
+	region = "ap-south-1"
+} 
+
+resource "aws_iam_user" "example_user" {
+	name = "pathnex_user"
+}
+
+resource "aws_iam_policy" "example_policy" {
+	name = "pathnex-policy"
+	description = "policy for pathnex application"
+        policy = jsonencode ({
+
+        Version = "2012-10-17"
+        Statement = [
+		{ 
+		Action = "s3:ListBucket"
+		Effect = "Allow"
+		Resource = "arn:aws:s3:::pathnex-bucket"
+	}
+	]
+	})
+}
+
+
+#COPY AND ADD
+# Dockerfile
+FROM ubuntu
+COPY pathnex-file.txt /opt/pathnex/file/
+ADD pathnex.tar.gz /opt/pathnex/extracted
+
+
+
+
