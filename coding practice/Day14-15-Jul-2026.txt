@@ -1,0 +1,89 @@
+---
+- name: Setup Nginx With Reverse Proxy
+  hosts: all
+  become: yes
+
+  tasks:
+   - name: Install Nginx
+     apt:
+        name: Nginx
+        state: present
+
+   - name: Configure Nginx As Reverse Proxy
+     template: 
+        src: reverse-proxy.conf.j2
+        dest:  /etc/nginx/conf.d/reverse-proxy.conf
+
+   - name: Restart Nginx
+     service: 
+        name: Nginx
+        state: restarted
+        enabled: yes
+
+#Terraform — Create S3 Bucket with Versioning and Logging
+
+provider "aws" {
+    region = "us-east-1"
+}
+
+resource "aws_s3_bucket" "pathnex_bucket" {
+    bucket = "pathnex-bucket"
+    versioning  {
+        enabled = true  
+    }
+
+    logging {
+        target_bucket = "pathnex-bucket"
+        target_prefix = "logs/"
+    }
+}
+
+🔹 Kubernetes — Ingress with Nginx Controller
+
+apiVersion : networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: pathnex-ingress
+    annotation:
+      nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+    rules:
+      - hosts: pathnex.local
+        http:
+            paths:
+                path: /
+                pathtype: prefix
+                backend:
+                    service: 
+                        name: pathnex-service
+                        port:
+                            number: 80
+                        
+🔹 Jenkinsfile — Build, Test, and Deploy with Stages
+
+pipeline {
+    agent any
+    stages {
+        stage ('Build') {
+            steps {
+                echo 'building docker image...'
+                docker.build('pathnex-web-app')
+            }
+        }
+
+        stage ('Test') {
+            steps {
+                echo 'running tests...'
+            }
+        }
+
+        stage ('Deploy TO K8s') {
+            steps {
+                script {
+                    sh 'kubectl apply -f kubernetes/deployment.yml'
+                }
+            }
+        }
+
+    }
+}
