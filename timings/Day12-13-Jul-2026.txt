@@ -1,0 +1,6 @@
+9-12:30 pm = youtube video watched
+1:30-3 pm = practice
+4-6:30 pm= daily tasks
+
+throughout mornig session i understood how to launch cluster and craete node, also diff add-ons for monitoring and ease of handling
+
