@@ -1,0 +1,4 @@
+ced Bash scripting by creating a shell script to automatically generate daily files with dynamic filenames using the date command.
+Learned how to schedule scripts using Cron, debug cron jobs in WSL, understand UTC vs IST timing, and configure daily automated execution.
+Also learned how to locate, move, and manage shell script files using commands like find, mv, chmod, and crontab.iv_Pathnex/timings/$F"
+
