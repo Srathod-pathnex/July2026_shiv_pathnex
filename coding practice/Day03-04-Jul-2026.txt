@@ -1,0 +1,20 @@
+#Ansible — Install Apache and Start Service
+---
+- name: Install and start apache service
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install apache
+      apt:
+        name: apache2
+        state: present	
+
+    - name: start apache
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+  
+
+
