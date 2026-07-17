@@ -1,0 +1,6 @@
+
+# vars file for pathnex
+
+---
+package_name: httpd
+service_name: httpd
