@@ -1,0 +1,8 @@
+
+# tasks file for pathnex
+
+---
+- name: Install httpd
+  yum:
+    name: httpd
+    state: present
