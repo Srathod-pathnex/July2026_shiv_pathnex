@@ -1,0 +1,1 @@
+Completed today's DevOps practice on Ansible, Terraform, Kubernetes, Shell Scripting, Jenkins file
