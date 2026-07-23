@@ -2,6 +2,8 @@
 # Day 08 — Introduction to Docker and CI/CD Pipelines
 # Ansible — Install Docker Compose
 
+Day 08 — Introduction to Docker and CI/CD Pipelines
+🔹 Ansible — Install Docker Compose
 - name: Install Docker Compose
   hosts: all
   become: yes
@@ -13,6 +15,27 @@
     - name: Install docker-compose
       pip:
         name: docker-compose
+
+
+# Kubernetes — Service with NodePort
+🔹 Terraform — EC2 with Security Group and EBS Volume
+resource "aws_security_group" "allow_ssh_http" {
+  name        = "allow_ssh_http"
+  description = "Allow SSH and HTTP access"
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 
 
 # Kubernetes — Service with NodePort
@@ -50,6 +73,19 @@ pipeline {
         }
     }
 }
+
+
+# Dockerfile
+
+🔹 GitLab CI/CD — Build & Push Docker Image
+stages:
+  - build
+  - push
+
+build:
+  stage: build
+  script:
+    - docker build -t pathnex-app .
 
 
 # Dockerfile
