@@ -1,0 +1,1 @@
+Completed Day 17 tasks covering Ansible, Terraform, Kubernetes, Shell Scripting, Jenkins
