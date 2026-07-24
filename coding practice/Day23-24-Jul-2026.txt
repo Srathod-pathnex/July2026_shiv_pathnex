@@ -1,0 +1,166 @@
+### Ansible — Add Tags to Users
+
+---
+- name: Create user with comment
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: create pathnex user
+      user:
+         name: devuser
+         comment: "Pathnex Devolper User"
+      tags:
+        - user
+        - create
+
+
+### terraform elastic ip
+
+resource "aws_eip" "PathnexEIP"{
+  instance = aws_instance.PathnexEC2.id
+  
+  tags = {
+	Name: "Pathnex-EIP"
+   }
+}
+
+
+
+###k8s- Horizontal auto scaler
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutocaler
+metadata:
+  name: pathnex-hpa
+spec:
+  scaleTargetRef:
+    apiversion: apps/v1
+    kind: Deployment
+    name: pathnex-hpa
+  minreplicas: 2
+  maxreplicas: 6
+  matrics: 
+    - type: Resource
+      resource: 
+       name: cpu
+       target:
+          type: Utiliazation
+          avaerageUtilization: 50
+
+
+### Shell Script — Kill High CPU Process
+
+
+#!/bin/bash
+PID=$(ps aux --sort=-%cpu | awk 'NR==2{print $2}')
+
+echo "Killing process: $PID"
+kill -9 $PID
+
+
+
+
+###jenkins Pipeline — Build Docker Image
+
+
+pipeline {
+
+	agent any
+	environment {
+		INSTITUTEp_NAME = "Pathnex"
+		TEAM = "Devops"
+		ENV = "staging"
+  		PROJECT = "webapp"
+                    }
+
+	stages {
+		stage("CHECKOUT") {
+			steps {
+			  	 git url: "https://github.com/Pathnex/sample-java-app.git"  
+ 			      }
+                                  }
+
+	stage("Build Docker Image") {
+                        steps {
+                             sh '''
+                	  	docker build -t pathnex/webapp:${ENV}-${BUILD_NUMBER} \
+                	--label "INSTITUTE_NAME=$INSTITUTE_NAME" \
+                	--label "TEAM=$TEAM" \
+                	--label "ENV=$ENV" \
+                	--label "PROJECT=$PROJECT" .
+                	'''  
+                              }
+                                    }
+    
+                   }
+
+
+        }
+
+
+
+
+
+### GitLab CI — Build Docker Image
+
+stages:
+  - docker-build
+
+variable:
+  INSTITUTE_NAME: "Pathnex-j"
+  TEAM: "DevOps-j"
+  ENV: "staging"
+  PROJECT: "WebApp"
+
+docker-build:
+  stage: docker-build
+  image: docker:latest
+  service:
+    docker:dind
+  script:
+     - docker build -t pathnex/webapp:${ENV}-${CI_PIPELINE_ID} \
+      --label "INSTITUTE_NAME=$INSTITUTE_NAME" \
+      --label "TEAM=$TEAM" \
+      --label "ENV=$ENV" \
+      --label "PROJECT=$PROJECT" .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
