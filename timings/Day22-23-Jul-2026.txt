@@ -1,0 +1,1 @@
+completed todays task of infrastructure creation using terraform and configuration using ansible with sort of jenkins
